@@ -1,0 +1,86 @@
+
+.mini-messagebox{
+    width: 300px!important;
+    height: 150px!important;
+}
+.mini-panel .mini-panel-viewport .mini-panel-body{
+    height: 120px;
+}
+.mini-messagebox-content td{
+    font-size:16px;
+}
+.mini-panel-header-inner{
+    font-size:18px!important;
+}
+.mini-tools-close:before{
+    content:''!important;
+}
+.mini-buttonedit-border{
+    background-color: whitesmoke !important;
+    border: none;
+}
+.mini-icon {
+    color:whitesmoke !important;
+}
+.mini-textbox-border{
+    background-color: white !important;
+    border: none !important;
+    height: 50px !important;
+    
+}
+.mini-textbox-input{
+    height: 52px !important;
+    line-height: 52px !important;
+    font-weight: bold;
+    font-size: 22px !important;
+}
+
+.mini-tabs .mini-tabs-plain .mini-tabs-space{
+    border-color: none!important;
+    background-color: white!important;
+}
+.mini-tabs-header-left .mini-tabs-space{
+    border:none!important;
+}
+.mini-tabs-header-left .mini-tabs-header{
+    width:150px;
+}
+.mini-tab{
+    padding:10px !important;
+    background-color: white!important;
+    border: none!important;
+    color: #333;
+}
+.mini-tabs-header-left .mini-tab-active{
+    border: none!important;
+    background-color: #26bdb0 !important;
+    color:white!important;
+}
+
+.mini-panel-viewport{
+    background-color: white;
+}
+.mini-grid-headerCell{
+    font-family: '微软雅黑'!important;
+    background-color: #26bdb0!important;
+    border-color: white!important;
+}
+.mini-tab-text{
+    font-size: 16px;
+    font-family: '微软雅黑'!important;
+}
+.mini-panel-border{
+    border-color: #26bdb0;
+}
+.mini-grid-table{
+    height: 40px!important;
+}
+.mini-grid-headerCell-inner{
+    font-size: 14px!important;
+    color: white;
+   
+}
+.mini-grid-row-selected{
+    background-color:#e4f1fb!important;
+    color: #0070a3!important;
+}

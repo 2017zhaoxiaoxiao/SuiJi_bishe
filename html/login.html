@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>登录</title>
+    <script src="../js/boot.js"></script>
+    <link rel="stylesheet" href="../css/login.css">
+    <link rel="stylesheet" href="../font/iconfont.css">
+
+</head>
+<body>
+   
+    <img class="bg" src="https://img-u-0.51miz.com/Photo/2017/06/28/01/P1227743_315577e52b6f4c6c800d44f81d6c13d6.jpg!/quality/90/unsharp/true/compress/true/format/webp/fh/320" alt="">
+    <div class="con_pg">
+        <form method="post">
+            <div class="flex_div" >
+                <span class="iconfont icon_style">&#xe61b;</span>
+                <input id="username" name="username" placeholder="用户名" class="input_style" type="text"><br/>
+            </div>
+            <div class="flex_div">
+                <span class="iconfont icon_style">&#xe617;</span>
+                <input id="pwd" name="pwd" class="input_style" placeholder="密码" type="password">
+            </div>
+            <div class="flex_div">
+                <button type="button" class="btn_login" onclick="toLogin()">登录</button>
+            </div>
+            
+        </form>
+    </div>
+    <script>
+        function toLogin(){
+            var username=$("#username").val();
+            var pwd=$("#pwd").val();
+            if(!isNullOrEmpty(username)&&!isNullOrEmpty(pwd)){
+               var userInfo = {
+                    username:username,
+                    pwd:pwd
+                };
+                if(localStorage.getItem("isLogin")!='1'){
+                    localStorage.setItem("userInfo",JSON.stringify(userInfo));
+                    localStorage.setItem("isLogin",'1');
+                    window.parent.document.getElementById("iframe1").setAttribute("src","./html/main.html");
+                }else{
+                   
+                    if(localStorage.getItem("userInfo")!=JSON.stringify(userInfo)){
+                        mini.alert("输入用户名或密码错误");
+                    }
+                }
+            }else{
+               mini.alert("请输入用户名和密码");
+            }
+            
+            
+        }
+    </script>
+</body>
+
+</html>

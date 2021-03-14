@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>编辑区</title>
+    <script src="../js/boot.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../font/iconfont.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../js/miniui/common.css">
+    <link rel="stylesheet" href="../css/colpick.css">
+    <script src="../js/colpick.js"></script>
+</head>
+<body>
+        <div class="editHeader"><span onclick="onCancel()" style="float: right; font-size:20px;color:#fff; cursor:pointer;" class="iconfont">&#xe610;</span></div>
+        <div class="tool">
+        <form>
+            <select id="fontFamily" class="fontFamily" onchange="changetext(this,'fontName')" >
+            </select>
+            <select id="fontSize" class="fontSize" onchange="changetext(this,'fontSize')">
+            </select>
+            <button type="button" class="btn_cls" onclick="changetext(this,'bold')"><span class="iconfont icon_style">&#xe637;</span></button>
+            <button type="button" class="btn_cls" onclick="changetext(this,'italic')"><span class="iconfont icon_style" >&#xe618;</span></button>
+            <button type="button" class="btn_cls" onclick="changetext(this,'strikeThrough')"><span class="iconfont icon_style">&#xe69b;</span></button>
+            <button type="button" class="btn_cls" onclick="changetext(this,'underline')"><span class="iconfont icon_style" >&#xe608;</span></button>
+            <button type="button" class="btn_cls" onclick="changetext(this,'justifyLeft')"><span class="iconfont icon_style">&#xe607;</span></button>
+            <button type="button" class="btn_cls" onclick="changetext(this,'justifyCenter')"><span class="iconfont icon_style">&#xe7c1;</span></button>
+            <button type="button" class="btn_cls" onclick="changetext(this,'justifyRight')"><span class="iconfont icon_style">&#xe694;</span></button>
+            <button type="button" id="picker1" onclick="showPicker('picker1')" class="btn_cls"><span id="bg" class="iconfont icon_style">&#xe600;</span></button>
+            <button type="button" id="picker2" onclick="showPicker('picker2')" class="btn_cls"><span id="size" class="iconfont icon_style">&#xe64b;</span></button>
+            <button type="button" class="btn_cls" onclick="changetext(this,'insertUnorderedList')"><span class="iconfont icon_style">&#xe802;</span></button>
+            <button type="button" class="btn_cls" onclick="changetext(this,'insertOrderedList')"><span class="iconfont icon_style">&#xe821;</span></button>
+            <button type="button" class="btn_cls" onclick="uploadImg()">
+                <span class="iconfont icon_style">&#xe602;</span>
+            </button>
+            <input type="file" id="intImg" accept="image/gif, image/jpg, image/png" onchange="showImg(this)" hidden />
+            <button type="button" class="btn_cls" onclick="showUrl()"><span class="iconfont icon_style">&#xe601;</span></button>
+            <select id="biaoti" class="biaoti" onchange="changetext(this,'formatBlock')">
+            </select>
+            <!-- <button class="edit_btn" onclick="saveContent()" style="width:40px;height:30px;margin-top: 0px;margin-left: 10px;" type="button">保存</button> -->
+
+        </form>
+
+    </div>
+    <div class="biji">
+        <div class="title_s" id="title"  contenteditable="true">
+          我的标题
+        </div>
+         <div class="topic_s"  id="editor" contenteditable="true"></div>
+         <div class="btn_div">
+            <button class="edit_btn" onclick="saveContent()" style="height:30px;width:40px;">保存</button>
+            <button class="edit_btn" onclick="onCancel()" style="height:30px;width:40px;margin-left: 10px;">取消</button>
+         </div>
+    </div>
+    <script src="../js/main.js"></script>
+    <script>
+        function showUrl(){
+            let linkURL = window.prompt('请输入链接地址');
+            if (linkURL) {
+                document.execCommand('insertHTML',false, '<a contenteditable="false" href="' + linkURL + '" target="_blank">' + linkURL+'</a>')
+            };
+       }
+        function showPicker(e){
+            $('#'+e).colpick(
+                {
+                    layout:'hex',
+                    onSubmit:function(hsb,hex,rgb,el,bySetColor) {
+                        if(e=="picker1"){
+                            $("#bg").css("color",'#'+hex);
+                            document.execCommand('hiliteColor', false,'#'+hex);
+
+                        }else{
+                            $("#size").css("color",'#'+hex);
+                            document.execCommand('foreColor', false,'#'+hex);
+
+                        }
+                        $('#'+e).colpickHide();
+                    }
+                    
+                }
+            );
+            
+        }
+        function uploadImg(){
+            $("#intImg").click();
+        }
+        function showImg(e){
+            let reader = new FileReader();
+            let file = e.files[0];
+            reader.onload = () => {
+                let base64Img = reader.result;
+                document.execCommand('insertImage',false, base64Img);
+                $("#intImg").value = ''; // 解决同一张图片上传无效的问题
+            };
+            reader.readAsDataURL(file);
+
+        }
+        function changetext(e,name){
+            console.log(name);
+            console.log(e.value);
+            if(name=='fontName'||name=='fontSize'){
+                document.execCommand(name, false, e.value);
+                return;
+            }else if(name=="formatBlock"){
+                document.execCommand(name, false, '<'+e.value+'>');
+                return;
+            }
+            document.execCommand(name, false,null);
+        }
+        function SetData(data){
+            $("#title").html(data.title);
+            $("#editor").html(data.topic);
+        }
+        function GetData(){
+            var biji={};
+            biji.title=$("#title").text();
+            biji.topic=$("#editor").html();
+            biji.text=$("#editor").text();
+            biji.time=formatDate(new Date());
+                // bijiContent.push(biji);
+                // localStorage.setItem("bijiContent",JSON.stringify(bijiContent));
+          
+            return biji;
+        }
+
+        //保存笔记
+        function saveContent(){
+            if($("#editor").html()){
+                mini.showTips({
+                    content:'保存成功',
+                    state:"success",
+                    x: 'center',    
+                    y: 'center',        
+                    timeout: 2000
+                })
+                CloseWindow('ok');
+            }else{
+                mini.showTips({
+                    content:'请填写内容后再保存',
+                    state:"info",
+                    x: 'center',    
+                    y: 'center',        
+                    timeout: 2000
+                })
+            }
+
+        }
+
+        function onCancel() {
+            CloseWindow();
+        }
+
+        function CloseWindow(action) {
+            if (window.CloseOwnerWindow) {
+                return window.CloseOwnerWindow(action);
+            }
+            else {
+                window.close();
+            }
+        }
+    </script>
+</body>
+</html>
