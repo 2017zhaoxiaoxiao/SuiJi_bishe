@@ -11,7 +11,16 @@
 }
 .mini-panel-header-inner{
     font-size:18px!important;
+    color:#fff;
 }
+.mini-panel-header, .mini-window .mini-panel-header{
+    background: #26bdb0!important;
+}
+.mini-button{
+    background-color: #26bdb0!important;
+    color: #fff;
+}
+
 .mini-tools-close:before{
     content:''!important;
 }
@@ -36,8 +45,17 @@
 }
 
 .mini-tabs .mini-tabs-plain .mini-tabs-space{
-    border-color: none!important;
-    background-color: white!important;
+   
+}
+.mini-tabs-bodys{
+    background: transparent!important;
+    border: transparent!important;
+}
+.mini-tabs-space{
+    border: none!important;
+}
+.mini-tabs .mini-tabs-space2 {
+    border-color: transparent!important;
 }
 .mini-tabs-header-left .mini-tabs-space{
     border:none!important;
@@ -47,7 +65,7 @@
 }
 .mini-tab{
     padding:10px !important;
-    background-color: white!important;
+    background-color: transparent!important;
     border: none!important;
     color: #333;
 }
@@ -66,7 +84,8 @@
     border-color: white!important;
 }
 .mini-tab-text{
-    font-size: 16px;
+    font-size: 18px;
+    color: white!important;
     font-family: '微软雅黑'!important;
 }
 .mini-panel-border{
@@ -83,4 +102,7 @@
 .mini-grid-row-selected{
     background-color:#e4f1fb!important;
     color: #0070a3!important;
+}
+body .mini-tabs-plain .mini-tabs-scrollCt{
+    border-bottom: 0!important;
 }

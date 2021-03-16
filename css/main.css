@@ -3,6 +3,14 @@ html,body,h2{
     padding:0;
    
 }
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus {
+/*背景颜色*/
+
+box-shadow:0 0 0 60px #fff inset; 
+/*字的颜色*/
+-webkit-text-fill-color: #000;}
 
 .header{
     width:100%;
