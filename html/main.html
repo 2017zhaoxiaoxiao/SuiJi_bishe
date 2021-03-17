@@ -28,6 +28,7 @@
                 <div class="top">      
                     <button class="edit_btn" type="button" style="width:120px;height:34px;" onclick="addBJ()"><span class="iconfont edit_icon">&#xe603;</span>新建笔记</button>
                     <div>
+                        <input type="text" class="search" id="title_input_fen" placeholder="请输入分类">
                         <input type="text" class="search" id="title_input" placeholder="请输入标题">
                         <button onclick="searchBtn()" class="edit_btn" type="button" style="width:80px;height:34px;"><span class="iconfont edit_icon">&#xe615;</span>搜索</button>  
                     </div>
@@ -37,7 +38,8 @@
                      showPager="false" sortBy="time" allowSortColumn="false"
                     >
                         <div property="columns">
-                            <div width="10" type="indexcolumn"></div>                
+                            <div width="10" type="indexcolumn"></div>   
+                            <div field="fenlei" width="80" align="center" headerAlign="center" allowSort="true">分类</div>                 
                             <div field="title" width="80" align="center" headerAlign="center" allowSort="true">标题</div>    
                             <div field="text" width="120" headerAlign="center" renderer="drawContent" allowSort="true">内容</div>    
                             <div field="time" width="80" align="center" headerAlign="center" dateFormat="yyyy-MM-dd" allowSort="true">更新时间</div>    
@@ -112,10 +114,13 @@
             '<button class="edit_btn" onclick="editContent()" style="width:40px;height:30px;margin-top: 0px;margin-left: 10px;" type="button">编辑</button>'
         }
         function deleteContent(e){
-           var row=datagrid1.getSelecteds();
-            datagrid1.removeRows(row,false);
-            var data=datagrid1. getChanges("removed",false);
-            localStorage.setItem("bijiContent",JSON.stringify(data));
+            mini.alert("你确定要删除该条笔记吗？","提示",function(){
+                var row=datagrid1.getSelecteds();
+                datagrid1.removeRows(row,false);
+                var data=datagrid1. getChanges("removed",false);
+                localStorage.setItem("bijiContent",JSON.stringify(data));
+            });
+          
         }
         function editContent(e){
             var row=datagrid1.getSelecteds();
@@ -192,20 +197,15 @@
                 })
         }
 
-        function searchBtn(){
-            var title=$("#title_input").val();
-            var rows = datagrid1.findRows(function(row){
-                if(row.title.includes(title)) return true;
-            });
-            datagrid1.setData(rows);
-        }
+     
 
         function searchBtn() {
             var title=$("#title_input").val();
+            var fenlei=$("#title_input_fen").val();
             //该处应请求接口，已title作为参数，最后返回查询后的rows，重新通过
             //setData去赋值
             var rows = datagrid1.findRows(function(row){
-                if(row.title.includes(title)) return true;
+                if(row.title.includes(title)&&row.fenlei.includes(fenlei)) return true;
             });
             datagrid1.setData(rows);
         }

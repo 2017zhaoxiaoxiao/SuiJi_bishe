@@ -47,6 +47,9 @@
         <div class="title_s" id="title"  contenteditable="true">
           我的标题
         </div>
+        <div class="fenlei">分类：
+            <input type="text" id="fenlei">
+        </div>
          <div class="topic_s"  id="editor" contenteditable="true"></div>
          <div class="btn_div">
             <button class="edit_btn" onclick="saveContent()" style="height:30px;width:40px;">保存</button>
@@ -115,7 +118,7 @@
             biji.title=$("#title").text();
             biji.topic=$("#editor").html();
             biji.text=$("#editor").text();
-           
+            biji.fenlei=$("#fenlei").val();  
             biji.time=formatDate(new Date());
            
             return biji;

@@ -3,6 +3,11 @@ html,body,h2{
     padding:0;
    
 }
+input{  
+	background:none;  
+	outline:none;  
+	border:none;
+}
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus {
@@ -66,7 +71,7 @@ box-shadow:0 0 0 60px #fff inset;
 }
 
 .biji{
-    width: 99%;
+    width: 100%;
     z-index: -1;
     background-color: white;
     padding: 2%;
@@ -100,7 +105,8 @@ box-shadow:0 0 0 60px #fff inset;
     outline:none;
     font-size: 24px;
     font-weight: bold;
-    margin: 20px auto;
+    margin: 0 auto;
+    margin-top: 20px;
     text-align: center;
 }
 .topic_s{
@@ -152,7 +158,10 @@ box-shadow:0 0 0 60px #fff inset;
     background-color:#26bdb0 ;
     color: white!important;
 }
-
+.fenlei{
+    width:98%;
+    margin:0 auto;
+}
 
 .top{
     width:100%;
