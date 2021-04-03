@@ -1,4 +1,4 @@
-html,body,h2{
+html,body,h2,ul{
     margin:0;
     padding:0;
    
@@ -67,7 +67,7 @@ box-shadow:0 0 0 60px #fff inset;
 }
 .content{
     width:100%;
-   
+
 }
 
 .biji{
@@ -75,9 +75,9 @@ box-shadow:0 0 0 60px #fff inset;
     z-index: -1;
     background-color: white;
     padding: 2%;
-    height: 500px;
-    margin-top:40px
-    
+    margin-top:40px;
+    background-image: url("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=336155314,497816491&fm=26&gp=0.jpg");
+
 }
 .tool{
     width:100%;
@@ -99,6 +99,18 @@ box-shadow:0 0 0 60px #fff inset;
     font-size: 16px;
     color:gray;
 }
+.firstLine{
+    width:98%;
+    margin:0 auto;
+    margin-top: 20px;
+    display: flex;
+    justify-content: space-between;
+
+}
+.fenlei{
+    width:200px;
+    margin:0 auto;
+}
 .title_s{
     width: 300px ;
     height: 36px ;
@@ -106,19 +118,19 @@ box-shadow:0 0 0 60px #fff inset;
     font-size: 24px;
     font-weight: bold;
     margin: 0 auto;
-    margin-top: 20px;
-    text-align: center;
+    text-align: left;
 }
 .topic_s{
-    width:98% ;
+    width:98%;
     margin: 0 auto;
     height: 420px ;
-    background-color: white;
+  
     font-size: 16px;
     padding: 2%;
     border: 1px solid gray;
     overflow: scroll;
     position: relative;
+    outline:none;
 
 
 }
@@ -158,10 +170,7 @@ box-shadow:0 0 0 60px #fff inset;
     background-color:#26bdb0 ;
     color: white!important;
 }
-.fenlei{
-    width:98%;
-    margin:0 auto;
-}
+
 
 .top{
     width:100%;
@@ -220,9 +229,44 @@ box-shadow:0 0 0 60px #fff inset;
 }
 
 .touxiang{
-    width:100px;
-    height:100px;
+    widows: 80px;
+    height:80px;
     border-radius: 50px;
     margin-top: 20px;
     
+}
+.left_tab{
+    width:100%;
+    text-align: center;
+    height:40px;
+    line-height: 40px;
+    margin-top: 10px;
+    background-color: #fff;
+    color: #26bdb0;
+    font-size: 16px;
+    cursor: pointer;
+    list-style-type :none;
+}
+.active{
+    background-color: #26bdb0;
+    color: #fff;
+}
+
+.left_cart{
+    width:100%;
+}
+
+.usersetting{
+    color:#26bdb0;
+    font-size:16px;
+    position: absolute;
+    top:80px;
+    right: 10px;
+    display: block;
+    width:20px;
+    height: 20px;
+    border-radius: 20px;
+    background-color: #fff;
+    text-align: center;
+    cursor: pointer;
 }

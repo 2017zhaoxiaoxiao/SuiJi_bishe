@@ -25,10 +25,11 @@
                         <span class="iconfont icon_style">&#xe617;</span>
                         <input id="login_pwd" name="login_pwd" class="input_style" placeholder="密码" type="password">
                     </div>
+                    <span class="fgpwd" type="button" onclick="fgpwd()">忘记密码</span>
+
                     <div class="flex_div">
                         <button type="button" class="btn_login" onclick="toLogin()">登录</button>
-                    </div>
-                    
+                    </div>        
                 </form>
             </div>
             <div title="注册">
@@ -61,13 +62,8 @@
                     pwd:pwd
                 };
                 localStorage.setItem("userInfo",JSON.stringify(userInfo));
-                mini.showTips({
-                    content: '注册成功',    
-                    state: 'success',     
-                    x: 'center',          
-                    y: 'center',          
-                    timeout: 2000     
-                })
+                window.parent.document.getElementById("iframe1").setAttribute("src","./html/findPwd.html?data=0");
+
             }else{
                mini.alert("请输入用户名和密码");
             }
@@ -102,6 +98,10 @@
             }
             
             
+        }
+        function fgpwd(){
+            window.parent.document.getElementById("iframe1").setAttribute("src","./html/findPwd.html?data=1");
+
         }
     </script>
 </body>
