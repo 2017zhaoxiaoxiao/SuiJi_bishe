@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日记管理</title>
+    <script src="../js/boot.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../font/iconfont.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../js/miniui/common.css">
+</head>
+<body>
+    <div class="top">      
+        <button class="edit_btn" type="button" style="width:120px;height:34px;" onclick="addBJ()"><span class="iconfont edit_icon">&#xe603;</span>新建日记</button>
+        <button class="edit_btn" type="button" style="width:120px;height:34px;margin-left: -200px" onclick="deleteContent()"><span class="iconfont edit_icon">&#xe603;</span>删除日记</button>
+        <div style="float: right;">
+            <input type="text" class="search" id="title_input_fen" placeholder="请输入分类">
+            <input type="text" class="search" id="title_input" placeholder="请输入标题">
+            <button onclick="searchBtn()" class="edit_btn" type="button" style="width:80px;height:34px;"><span class="iconfont edit_icon">&#xe615;</span>搜索</button>  
+        </div>
+    </div>
+    <div class="bottom">
+        <div id="datagrid1" class="mini-datagrid" style="width:100%;height:100%;"  
+        showPager="false" sortBy="time" allowSortColumn="false"  multiSelect="true"
+       >
+       <div property="columns">
+        <div width="10" type="indexcolumn"></div>   
+        <div width="10" type="checkcolumn"></div>   
+        <div field="fenlei" width="80" align="center" headerAlign="center" allowSort="true">分类</div>                 
+        <div field="title" width="80" align="center" headerAlign="center" allowSort="true">标题</div>    
+        <div field="text" width="120" headerAlign="center" renderer="drawContent" allowSort="true">内容</div>    
+        <div field="time" width="80" align="center" headerAlign="center" dateFormat="yyyy-MM-dd" allowSort="true">更新时间</div>    
+        <div field="quanxian" width="30" align="center" headerAlign="center"  renderer="drawQX">公开</div>    
+        <div field="option" width="30" align="center" headerAlign="center"  renderer="drawBtn">操作</div>    
+    </div>
+</div>
+    </div>
+    <script>
+          mini.parse();
+        var datagrid1=mini.get("datagrid1");
+        var bijiContent=[];
+        var username = JSON.parse(localStorage.getItem("userInfo")).username;
+        if(localStorage.getItem("bijiContent")==null){
+             bijiContent=[];
+        }
+        else{
+            bijiContent=JSON.parse(localStorage.getItem("bijiContent"));
+            datagrid1.setData(JSON.parse(localStorage.getItem("bijiContent")));
+         }  
+        $("#username").text(username);
+        function toLoginOut(){
+            localStorage.setItem("isLogin",'0');
+            window.parent.document.getElementById("iframe1").setAttribute("src","./html/login.html");
+        }
+       
+      
+        //保存笔记
+        function saveContent(){
+            var biji={};
+            if($("#editor").html()){
+                biji.title=$("#title").text();
+                biji.topic=$("#editor").html();
+                biji.time=formatDate(new Date());
+                bijiContent.push(biji);
+                localStorage.setItem("bijiContent",JSON.stringify(bijiContent));
+                mini.showTips({
+                    content:'保存成功',
+                    state:"success",
+                    x: 'center',    
+                    y: 'center',        
+                    timeout: 2000
+                })
+            }else{
+                mini.showTips({
+                    content:'请填写内容后再保存',
+                    state:"info",
+                    x: 'center',    
+                    y: 'center',        
+                    timeout: 2000
+                })
+            }
+
+        }
+
+        function drawBtn(e){
+            return  '<button class="edit_btn" onclick="editContent()" style="width:40px;height:30px;margin-top: 0px;" type="button">编辑</button>'
+        }
+        function drawQX(e){
+            return '<input type="checkbox"   onclick="toOpen(this)" class="jc-switch">'
+
+        }
+        function deleteContent(e){
+            var row=datagrid1.getSelecteds();
+            if(row.length==0){
+                mini.alert("请选择要删除的日记","提示");
+            }else{
+                mini.confirm("你确定要删除该条日记吗？","提示",function(e){
+                if(e=='ok'){
+                var row=datagrid1.getSelecteds();
+                datagrid1.removeRows(row,false);
+                var data=datagrid1. getChanges("removed",false);
+                localStorage.setItem("bijiContent",JSON.stringify(data));
+                }
+            });
+            }        
+        }
+        function editContent(e){
+            var row=datagrid1.getSelecteds();
+            editBJ(row[0]);
+        }
+        function drawContent (e){
+            var showContent=e.value;
+            return showContent;
+        }
+       
+        function addBJ(){
+            mini.open(
+                {
+                    targetWindow: window,   //页面对象。默认是顶级页面。
+                    url: './addBJ.html',        //页面地址
+                    width: 900,      //宽度
+                    height: 600,     //高度
+                    showHeader:false,
+                    allowResize: true,       //允许尺寸调节
+                    allowDrag: true,         //允许拖拽位置
+                    showModal: true,         //显示遮罩
+                    loadOnRefresh: false,       //true每次刷新都激发onload事件
+                    onload: function () {       //弹出页面加载完成
+                        var iframe = this.getIFrameEl(); 
+                        //调用弹出页面方法进行初始化
+                        //iframe.contentWindow.SetData(key); 
+                                        
+                    },
+                    ondestroy: function (action) {  //弹出页面关闭前
+                        if (action == "ok") {       //如果点击“确定”
+                            var iframe = this.getIFrameEl();
+                            //获取选中、编辑的结果
+                           var data = iframe.contentWindow.GetData();
+                            data = mini.clone(data);    //必须。克隆数据。
+                            bijiContent.push(data);
+                            datagrid1.setData(bijiContent);
+                            localStorage.setItem("bijiContent",JSON.stringify(bijiContent));
+                            
+                        }                        
+                    }
+                })
+        }
+        function editBJ(key){
+            mini.open(
+                {
+                    targetWindow: window,   //页面对象。默认是顶级页面。
+                    url: './editBJ.html',        //页面地址
+                    width: 900,      //宽度
+                    height: 600,     //高度
+                    showHeader:false,
+                    allowResize: true,       
+                    allowDrag: true,         
+                    showModal: true,         
+                    loadOnRefresh: false,       
+                    onload: function () {       
+                        var iframe = this.getIFrameEl(); //调用弹出页面方法进行初始化
+                        iframe.contentWindow.SetData(key);                  
+                    },
+                    ondestroy: function (action) {  //弹出页面关闭前
+                        if (action == "ok") {       //如果点击“确定”
+                            var iframe = this.getIFrameEl();
+                            //获取选中、编辑的结果
+                           var data = iframe.contentWindow.GetData();
+                            data = mini.clone(data);    //必须。克隆数据。
+                            var row=datagrid1.getSelected();
+                            datagrid1.updateRow ( row, data);
+                            bijiContent[datagrid1.indexOf(row)]=data;
+                            localStorage.setItem("bijiContent",JSON.stringify(bijiContent));
+                            
+                        }                        
+                    }
+                })
+        }
+
+
+
+        function searchBtn() {
+            var title=$("#title_input").val();
+            var fenlei=$("#title_input_fen").val();
+            //该处应请求接口，已title作为参数，最后返回查询后的rows，重新通过
+            //setData去赋值
+            var rows = datagrid1.findRows(function(row){
+                if(row.title.includes(title)&&row.fenlei.includes(fenlei)) return true;
+            });
+            datagrid1.setData(rows);
+        }
+       
+        function toOpen(e){
+            console.log(e.checked);
+        }
+    </script>
+   
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>日记分享区</title>
+    <script src="../js/boot.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <link rel="stylesheet" href="../font/iconfont.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../js/miniui/common.css">
+    <link rel="stylesheet" href="../css/share.css">
+</head>
+<body>
+    <ul class="content" id="content">
+    </ul>
+    <script>
+        var biji= JSON.parse(localStorage.getItem("bijiContent"));
+        biji.forEach( ( item, i ) => {
+            var html= 
+                '<li class="list" key='+ i +'>'+
+                '<div class="media">'+
+                    '<div class="media-left">'+
+                    '<img src="../images/peopleImg.jpg" class="media-object" style="width:60px">'+
+                    '</div>'+
+                    '<div class="media-body">'+
+                        '<h4 class="media-heading">'+item.title+'</h4>'+
+                        '<p class="tip">'+item.fenlei+'</p>'+
+                        '<p class="text">'+item.text+'</p>'+
+                    '</div>'+
+                '</div>'+
+            '</li>'
+            $("#content").append($(html));
+        })
+        
+        $('ul.content li').on('click',function(e){
+           var data=biji[$(this).attr("key")];
+            mini.open(
+                {
+                    targetWindow: window,   //页面对象。默认是顶级页面。
+                    url: './editBJ.html',        //页面地址
+                    width: 900,      //宽度
+                    height: 600,     //高度
+                    showHeader:false,
+                    allowResize: true,       
+                    allowDrag: true,         
+                    showModal: true,         
+                    loadOnRefresh: false,       
+                    onload: function () {       
+                        var iframe = this.getIFrameEl(); //调用弹出页面方法进行初始化
+                        iframe.contentWindow.SetData(data);                  
+                    },
+                    ondestroy: function (action) {  //弹出页面关闭前
+                        if (action == "ok") {       //如果点击“确定”
+                            var iframe = this.getIFrameEl();
+                            //获取选中、编辑的结果
+                           var data = iframe.contentWindow.GetData();
+                            data = mini.clone(data);    //必须。克隆数据。
+                            var row=datagrid1.getSelected();
+                            datagrid1.updateRow ( row, data);
+                            bijiContent[datagrid1.indexOf(row)]=data;
+                            localStorage.setItem("bijiContent",JSON.stringify(bijiContent));
+                            
+                        }                        
+                    }
+                })
+
+        })
+    </script>
+</body>
+</html>

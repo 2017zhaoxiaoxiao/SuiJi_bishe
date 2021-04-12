@@ -270,3 +270,37 @@ box-shadow:0 0 0 60px #fff inset;
     text-align: center;
     cursor: pointer;
 }
+input[type="checkbox"].jc-switch{
+	/* 属性选择[type="checkbox"] */
+    appearance: none;
+    outline: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    position: relative;
+    width: 2.8rem;
+    height: 1.4rem;
+    /* border: 1px solid #ccc; */
+    background-color: #ccc;
+    border-radius: 0.7rem;
+}
+input[type="checkbox"].jc-switch::after{
+    content: "";
+    display:inline-block;
+    width: 1.4rem;
+    height: 1.4rem;
+    border-radius: 50%;
+    background-color: #fff;
+    box-shadow: 0 0 2px #999;
+    transition: left 0.1s;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+input[type="checkbox"].jc-switch:checked{
+    background-color: #26bdb0;
+}
+input[type="checkbox"].jc-switch:checked::after{
+    position: absolute;
+    top: 0;
+    left: 50%;
+}

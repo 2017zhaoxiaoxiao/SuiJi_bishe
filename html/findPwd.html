@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>找回密码</title>
+    <script src="../js/boot.js"></script>
+    <script src="../js/jquery.min.js"></script>
+    <base href="/">
+    <link type="text/css" rel="stylesheet" href="../css/main.css">
+    <link type="text/css" rel="stylesheet" href="../css/fgpwd.css">
+    <link type="text/css" rel="stylesheet" href="../layui/css/layui.css">
+    <script src="../layui/layui.js"></script>
+</head>
+<body>
+    <div class="header">
+        <h2 id="title"></h2>
+    </div>
+    <div class="fgContent">
+        <p  class="c_title">请输入密保问题答案</p>
+        <form class="layui-form myform" >
+            <div class="layui-form-item">
+              <label class="layui-form-label">邮箱</label>
+              <div class="layui-input-block">
+                <input type="email" name="email" id="email" required  lay-verify="required" placeholder="请输入注册时填写的邮箱" autocomplete="off" class="layui-input">
+              </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">手机号</label>
+                <div class="layui-input-block">
+                  <input type="tel" name="tel" id="phone" required  lay-verify="required" placeholder="请输入注册时填写的手机" autocomplete="off" class="layui-input">
+                </div>
+              </div>
+              <button id="btn_id" class="layui-btn" lay-submit lay-filter="formDemo" style="width: 80px;" ></button>
+        </form>
+    </div>
+    <script>
+        var r =window.parent.document.getElementById("iframe1").contentWindow.location.search.substr(1).split("=")[1];
+        console.log(r);
+        if("1"==r){
+            $("#btn_id").html("验证");
+            $("#title").html("找回密码");
+            layui.use('form', function(){
+                var form = layui.form;
+            //监听提交
+                form.on('submit(formDemo)', function(data){
+                    console.log(data);
+                    layer.msg(JSON.stringify(data));
+                    window.parent.document.getElementById("iframe1").setAttribute("src","./html/login.html");
+
+                    return false;
+                });
+            });
+
+        }else{
+            $("#btn_id").html("确定");
+            $("#title").html("设置密保问题");
+            layui.use('form', function(){
+                var form = layui.form;
+            //监听提交
+                form.on('submit(formDemo)', function(data){
+                    console.log(data);
+                    layer.msg(JSON.stringify(data));
+                    window.parent.document.getElementById("iframe1").setAttribute("src","./html/login.html");
+
+                    return false;
+                });
+            });
+
+
+        }
+
+      
+    </script>
+</body>
+</html>

@@ -1,0 +1,20 @@
+.fgContent{
+    width:70%;
+    margin:0 auto;
+    height:500px;
+    background-color: #fff;
+}
+.c_title{
+    display: block;
+    height: 80px;
+    font-size: 30px;
+    line-height: 80px;
+    text-align: center;
+    border-bottom: 1px solid #eee;
+    background: #fff;
+}
+.myform{
+    width:70%;
+    margin: 40px auto;
+    text-align: center;
+}

@@ -1,0 +1,20 @@
+.biaoqian{
+    font-size: 20px;
+    color: #26bdb0;
+}
+.ziliao{
+    font-size: 16px;
+}
+.content{
+    width: 80%;
+    margin: 30px auto;
+}
+.left{
+    float: left;
+    width: 20%;
+    height: 60px;
+}
+.right{
+    float: left;
+    width: 70%;
+}

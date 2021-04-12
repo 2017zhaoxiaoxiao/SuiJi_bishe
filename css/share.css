@@ -1,0 +1,45 @@
+.content{
+    width:100%;
+    
+}
+.list{
+    width:98%;
+    padding:10px 1% 10px 1%;
+    background-color: #fff;
+    height:100px;
+    margin-bottom: 1px;
+}
+.media{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.media-left{
+    width:auto;
+    height:auto;
+}
+.media-body{
+    width:94%;
+    height:auto;
+}
+.media-heading,.tip{
+    display: inline;
+    width: fit-content;
+}
+.media-heading{
+    font-size: 16px;
+}
+.tip{
+    background-color: indianred;
+    color: #fff;
+    float: right;
+}
+.text{
+    max-height:50px;
+    height:auto;
+    overflow:hidden;
+    text-overflow:ellipsis;
+    padding: 0px;
+    margin-bottom: 0px;
+    margin-top:10px
+}
