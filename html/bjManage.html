@@ -31,7 +31,7 @@
         <div field="title" width="80" align="center" headerAlign="center" allowSort="true">标题</div>    
         <div field="text" width="120" headerAlign="center" renderer="drawContent" allowSort="true">内容</div>    
         <div field="time" width="80" align="center" headerAlign="center" dateFormat="yyyy-MM-dd" allowSort="true">更新时间</div>    
-        <div field="quanxian" width="30" align="center" headerAlign="center"  renderer="drawQX">公开</div>    
+        <div field="open" width="30" align="center" headerAlign="center"  renderer="drawQX">公开</div>    
         <div field="option" width="30" align="center" headerAlign="center"  renderer="drawBtn">操作</div>    
     </div>
 </div>
@@ -87,8 +87,12 @@
             return  '<button class="edit_btn" onclick="editContent()" style="width:40px;height:30px;margin-top: 0px;" type="button">编辑</button>'
         }
         function drawQX(e){
-            return '<input type="checkbox"   onclick="toOpen(this)" class="jc-switch">'
+            if(e.row.open)
+                return '<input type="checkbox" checked  onclick="toOpen(this)" class="jc-switch">'
+            else{
+                return '<input type="checkbox"   onclick="toOpen(this)" class="jc-switch">'
 
+            }
         }
         function deleteContent(e){
             var row=datagrid1.getSelecteds();
@@ -113,14 +117,15 @@
             var showContent=e.value;
             return showContent;
         }
-       
+let Width=document.body.clientWidth ;
+let Height= document.body.clientHeight;
         function addBJ(){
             mini.open(
                 {
                     targetWindow: window,   //页面对象。默认是顶级页面。
                     url: './addBJ.html',        //页面地址
-                    width: 900,      //宽度
-                    height: 600,     //高度
+                    width:Width ,      //宽度
+                    height: Height,     //高度
                     showHeader:false,
                     allowResize: true,       //允许尺寸调节
                     allowDrag: true,         //允许拖拽位置
@@ -151,8 +156,8 @@
                 {
                     targetWindow: window,   //页面对象。默认是顶级页面。
                     url: './editBJ.html',        //页面地址
-                    width: 900,      //宽度
-                    height: 600,     //高度
+                    width: Width,      //宽度
+                    height: Height,     //高度
                     showHeader:false,
                     allowResize: true,       
                     allowDrag: true,         
@@ -192,7 +197,25 @@
         }
        
         function toOpen(e){
-            console.log(e.checked);
+            if(e.checked){
+                mini.confirm("你确定要公开该条日记吗？","提示",function(e){
+                    if(e=='ok'){
+                    var row=datagrid1.getSelecteds();
+                    var data=row[0];
+                    data.open=true;
+                    datagrid1.updateRow ( row, data);
+                    bijiContent[datagrid1.indexOf(row[0])]=data;
+                    localStorage.setItem("bijiContent",JSON.stringify(bijiContent));
+                    }
+                })
+            }else{
+                var row=datagrid1.getSelecteds();
+                    var data=row[0];
+                    data.open=false;
+                    datagrid1.updateRow ( row, data);
+                    bijiContent[datagrid1.indexOf(row[0])]=data;
+                    localStorage.setItem("bijiContent",JSON.stringify(bijiContent));
+            }
         }
     </script>
    

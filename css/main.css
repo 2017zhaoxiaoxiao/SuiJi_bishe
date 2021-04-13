@@ -74,7 +74,7 @@ box-shadow:0 0 0 60px #fff inset;
     width: 100%;
     z-index: -1;
     background-color: white;
-    padding: 2%;
+    padding: 10px;
     margin-top:40px;
     background-image: url("https://ss1.bdstatic.com/70cFuXSh_Q1YnxGkpoWK1HF6hhy/it/u=336155314,497816491&fm=26&gp=0.jpg");
 
@@ -84,7 +84,7 @@ box-shadow:0 0 0 60px #fff inset;
     padding:0 20px;
     background-color: white;
     position: fixed;
-    top:30px;
+    top:0px;
     display: flex;
     align-items: center;
     z-index: 9999;
@@ -102,7 +102,6 @@ box-shadow:0 0 0 60px #fff inset;
 .firstLine{
     width:98%;
     margin:0 auto;
-    margin-top: 20px;
     display: flex;
     justify-content: space-between;
 
@@ -195,7 +194,7 @@ box-shadow:0 0 0 60px #fff inset;
 }
 .search:focus{
     outline: none;
-    border: 2px solid grey;
+    border: 1px solid #eee;
 }
 .edit_btn{
     background-color: #26bdb0;

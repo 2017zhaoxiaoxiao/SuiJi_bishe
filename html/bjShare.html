@@ -16,21 +16,24 @@
     </ul>
     <script>
         var biji= JSON.parse(localStorage.getItem("bijiContent"));
+
         biji.forEach( ( item, i ) => {
-            var html= 
-                '<li class="list" key='+ i +'>'+
-                '<div class="media">'+
-                    '<div class="media-left">'+
-                    '<img src="../images/peopleImg.jpg" class="media-object" style="width:60px">'+
+            if(item.open){
+                var html= 
+                    '<li class="list" key='+ i +'>'+
+                    '<div class="media">'+
+                        '<div class="media-left">'+
+                        '<img src="../images/peopleImg.jpg" class="media-object" style="width:60px">'+
+                        '</div>'+
+                        '<div class="media-body">'+
+                            '<h4 class="media-heading">'+item.title+'</h4>'+
+                            '<p class="tip">'+item.fenlei+'</p>'+
+                            '<p class="text">'+item.text+'</p>'+
+                        '</div>'+
                     '</div>'+
-                    '<div class="media-body">'+
-                        '<h4 class="media-heading">'+item.title+'</h4>'+
-                        '<p class="tip">'+item.fenlei+'</p>'+
-                        '<p class="text">'+item.text+'</p>'+
-                    '</div>'+
-                '</div>'+
-            '</li>'
-            $("#content").append($(html));
+                '</li>'
+                $("#content").append($(html));
+            }
         })
         
         $('ul.content li').on('click',function(e){
