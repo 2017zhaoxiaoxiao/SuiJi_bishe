@@ -31,7 +31,7 @@
             <span onclick="uploadImg()">更改头像</span>
         </div>
         <div class="right">
-            <form class="layui-form myform" style="text-align: center;">
+            <form class="layui-form myform" lay-filter="formTest" style="text-align: center;">
                 <div class="layui-form-item">
                   <label class="layui-form-label">用户名</label>
                   <div class="layui-input-block">
@@ -68,7 +68,8 @@
         </div>
     </div>
     <script>
-        
+        var userImg = localStorage.getItem('userImg');
+        $("#peopleImg").attr("src",userImg);
           function uploadImg(){
             $("#intImg").click();
         }
@@ -78,6 +79,7 @@
             reader.onload = () => {
                 let base64Img = reader.result;
                 $('#peopleImg').attr('src',base64Img);
+                userImg = base64Img;
             };
             reader.readAsDataURL(file);
 
@@ -85,8 +87,19 @@
         layui.use('form', function(){
             var form = layui.form;
             form.render();
+            let userinfo =JSON.parse(localStorage.getItem("userInfo"));
+            form.val("formTest", { //formTest 即 class="layui-form" 所在元素属性 lay-filter="" 对应的值
+                "username": userinfo.username
+                ,"sex": userinfo.sex
+                ,"tel": userinfo.tel
+                ,"email": userinfo.email
+                ,"birth":userinfo.birth
+            });
             form.on('submit(formDemo)', function(data){
-                layer.msg(JSON.stringify(data.field));
+                layer.msg("保存成功");
+                localStorage.setItem("userInfo",JSON.stringify(data.field));
+                localStorage.setItem("userImg",userImg);
+                parent.window.setImg(userImg);
                 return false;
             });
 });

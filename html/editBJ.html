@@ -46,7 +46,7 @@
     <div class="biji">
         <div class="firstLine">
             <div class="title_s" id="title"  contenteditable="true">
-            今日主题
+            标题
             </div>
             <div  class="fenlei">
                 <label>分类：</label>
@@ -128,12 +128,21 @@
             biji.topic=$("#editor").html();
             biji.text=$("#editor").text();
             biji.fenlei=$("#fenlei").val();  
-            biji.time=formatDate(new Date());
-  
-          
+            biji.img = localStorage.getItem("userImg");
+            biji.time= getDate();
             return biji;
         }
-
+       //日期处理
+       function getDate(date){
+            var myDate = new Date();
+            var year= myDate.getFullYear();    //获取完整的年份(4位,1970-????)  2014
+            var month = myDate.getMonth()+1;       //获取当前月份(0-11,0代表1月)  9
+            var day =myDate.getDate();        //获取当前日(1-31)  24
+            var h = myDate.getHours();       
+            var m =myDate.getMinutes();     
+            var s = myDate.getSeconds(); 
+            return year+'-'+month+'-'+day+" "+h+":"+m+":"+s    
+        }
         //保存笔记
         function saveContent(){
             if($("#editor").html()){

@@ -30,7 +30,7 @@
     font-size: 16px;
 }
 .tip{
-    background-color: indianred;
+    background-color: #26bdb0;
     color: #fff;
     float: right;
 }
@@ -42,4 +42,13 @@
     padding: 0px;
     margin-bottom: 0px;
     margin-top:10px
+}
+.nonetips{
+    width: 60%;
+    height: 50px;
+    font-size: 18px;
+    font-family: "宋体";
+    margin: 0 auto;
+    text-align: center;
+    margin-top: 100px;
 }

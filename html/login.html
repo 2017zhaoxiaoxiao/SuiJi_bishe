@@ -82,6 +82,16 @@
                     username:username,
                     pwd:pwd
                 };
+                // $.ajax(
+                //     {
+                //         url:'http://121.5.109.123:8080/login',
+                //         data:userInfo,
+                //         type:'post',
+                //         success:function(result){
+                //             console.log(result);
+                //         }
+                //     }
+                // )
                 if(localStorage.getItem("isLogin")=='1'){
                     window.parent.document.getElementById("iframe1").setAttribute("src","./html/main.html");
                     return;

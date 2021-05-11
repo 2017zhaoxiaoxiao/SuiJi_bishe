@@ -40,6 +40,8 @@
             </div> 
     </div>
     <script>
+        let userImg =localStorage.getItem("userImg")||"../images/peopleImg.jpg";
+        $("#peopleImg").attr("src",userImg);
            $('ul.left_cart li').on('click',function(e){
              $(this).addClass("active").siblings().removeClass("active");
             if($(this).attr("name")=="tab1"){
@@ -54,8 +56,12 @@
             window.parent.document.getElementById("iframe1").setAttribute("src","./html/login.html");
         }
         function setUser(){
+            $('ul.left_cart li').removeClass("active");
             $("#rightContent").attr("src","./user.html");
 
+        }
+        function setImg(img){
+            $("#peopleImg").attr("src",img);
         }
            
        

@@ -33,40 +33,40 @@ var family=[
 }];
 var fontsize=[
     {
-    text:"1",
+    text:"12px",
     value:'1'
 },{
-    text:"2",
+    text:"16px",
     value:'2'
 },
 {
-    text:"3",
+    text:"18px",
     value:'3'      
 },{
-    text:"4",
+    text:"22px",
     value:'4'
 },
 {
-    text:"5",
+    text:"24px",
     value:'5'
 },
 {
-    text:"6",
+    text:"28px",
     value:'6'
 },
 {
-    text:"7",
+    text:"32px",
     value:'7'
 }
 ];
 var biaoti_arr=[
     {text:'常规',value:''},
-    {text:'一级标题',value:'h1'},
-    {text:'二级标题',value:'h2'},
-    {text:'三级标题',value:'h3'},
-    {text:'四级标题',value:'h4'},
-    {text:'五级标题',value:'h5'},
-    {text:'六级标题',value:'h6'}
+    {text:'一级标题',value:'H1'},
+    {text:'二级标题',value:'H2'},
+    {text:'三级标题',value:'H3'},
+    {text:'四级标题',value:'H4'},
+    {text:'五级标题',value:'H5'},
+    {text:'六级标题',value:'H6'}
 
 ];
 for(let i=0;i<biaoti_arr.length;i++){
